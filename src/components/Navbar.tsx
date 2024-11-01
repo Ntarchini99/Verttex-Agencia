@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Menu, X, Globe2 } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -44,18 +44,16 @@ const Navbar = () => {
                 <a
                   key={link.name}
                   href={link.href}
-                  className={`${
-                    isScrolled ? 'text-gray-700 hover:text-violet-700' : 'text-white/90 hover:text-white'
-                  } transition-colors font-medium`}
+                  className={`${isScrolled ? 'text-gray-700 hover:text-violet-700' : 'text-white/90 hover:text-white'
+                    } transition-colors font-medium`}
                 >
                   {link.name}
                 </a>
               ))}
               <button
                 onClick={toggleLanguage}
-                className={`flex items-center space-x-1 ${
-                  isScrolled ? 'text-gray-700 hover:text-violet-700' : 'text-white/90 hover:text-white'
-                }`}
+                className={`flex items-center space-x-1 ${isScrolled ? 'text-gray-700 hover:text-violet-700' : 'text-white/90 hover:text-white'
+                  }`}
               >
                 <Globe2 className="h-5 w-5" />
                 <span className="uppercase">{language}</span>
@@ -67,17 +65,15 @@ const Navbar = () => {
           <div className="md:hidden flex items-center space-x-4">
             <button
               onClick={toggleLanguage}
-              className={`${
-                isScrolled ? 'text-gray-700' : 'text-white'
-              }`}
+              className={`${isScrolled ? 'text-gray-700' : 'text-white'
+                }`}
             >
               <Globe2 className="h-5 w-5" />
             </button>
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={`${
-                isScrolled ? 'text-gray-700' : 'text-white'
-              } p-2`}
+              className={`${isScrolled ? 'text-gray-700' : 'text-white'
+                } p-2`}
             >
               {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>

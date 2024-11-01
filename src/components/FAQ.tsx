@@ -1,38 +1,42 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const { t } = useLanguage();
 
   const faqs = [
     {
-      question: 'What services do you offer?',
-      answer: 'We offer web development, graphic design, UX/UI design, and social media management services tailored to your business needs.'
+      question: t('faq.services'),
+      answer: t('faq.services.answer'),
     },
     {
-      question: 'How long does a typical web project take?',
-      answer: 'Project timelines vary depending on complexity. A simple website might take 2-4 weeks, while more complex projects can take 2-3 months.'
+      question: t('faq.timeline'),
+      answer: t('faq.timeline.answer'),
     },
     {
-      question: 'Do you offer maintenance services?',
-      answer: 'Yes, we offer ongoing maintenance packages to keep your website secure, updated, and performing optimally.'
+      question: t('faq.maintenance'),
+      answer: t('faq.maintenance.answer'),
     },
     {
-      question: 'What is your design process?',
-      answer: 'Our design process includes discovery, wireframing, design concepts, revisions, and final implementation, with client feedback at each stage.'
-    }
+      question: t('faq.designProcess'),
+      answer: t('faq.designProcess.answer'),
+    },
   ];
 
   return (
     <section className="py-20 px-4 bg-white">
       <div className="max-w-3xl mx-auto">
-        <h2 className="text-4xl font-bold text-center mb-16">Frequently Asked Questions</h2>
+        <h2 className="text-4xl font-bold text-center mb-16">{t('faq.title')}</h2>
         <div className="space-y-4">
           {faqs.map((faq, index) => (
             <div key={index} className="border rounded-lg">
               <button
                 className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50"
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                aria-expanded={openIndex === index}
+                aria-controls={`faq-answer-${index}`}
               >
                 <span className="font-medium">{faq.question}</span>
                 {openIndex === index ? (
@@ -42,16 +46,23 @@ const FAQ = () => {
                 )}
               </button>
               {openIndex === index && (
-                <div className="px-6 py-4 text-gray-600 border-t">
+                <div id={`faq-answer-${index}`} className="px-6 py-4 text-gray-600 border-t transition-all duration-200 ease-in-out max-h-0 overflow-hidden">
                   {faq.answer}
                 </div>
               )}
             </div>
           ))}
         </div>
+        <div className="mt-8 text-center">
+          <p className="text-gray-600">
+            {t('faq.contact')}
+            <a href="/contact" className="text-blue-600"> {t('faq.contactLink')}</a>.
+          </p>
+        </div>
       </div>
     </section>
   );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export default FAQ;
