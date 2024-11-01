@@ -1,4 +1,4 @@
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguage } from '../../contexts/LanguageContext'; 
 import { Code2, Palette, Layout, Share2 } from 'lucide-react';
 
 const services = [

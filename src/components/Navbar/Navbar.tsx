@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Globe2 } from 'lucide-react';
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguage } from '../../contexts/LanguageContext'; 
 import { Link } from 'react-scroll';
 
 const Navbar = () => {

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
-import { useLanguage } from '../contexts/LanguageContext';
+import { useLanguage } from '../../contexts/LanguageContext'; 
 
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
