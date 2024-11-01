@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Globe2 } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
+import { Link } from 'react-scroll';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,11 +17,11 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: t('nav.services'), href: '#services' },
-    { name: t('nav.portfolio'), href: '#portfolio' },
-    { name: t('nav.about'), href: '#about' },
-    { name: t('nav.faq'), href: '#faq' },
-    { name: t('nav.contact'), href: '#contact' }
+    { name: t('nav.services'), href: 'services' },
+    { name: t('nav.portfolio'), href: 'portfolio' },
+    { name: t('nav.about'), href: 'about' },
+    { name: t('nav.faq'), href: 'faq' },
+    { name: t('nav.contact'), href: 'contact' }
   ];
 
   const toggleLanguage = () => {
@@ -37,23 +38,26 @@ const Navbar = () => {
             </a>
           </div>
 
-          {/* Desktop Navigation */}
+          {/* Desktop */}
           <div className="hidden md:flex md:items-center">
             <div className="ml-10 flex items-center space-x-8">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.name}
-                  href={link.href}
+                  to={link.href}
+                  smooth={true}
+                  duration={500}
                   className={`${isScrolled ? 'text-gray-700 hover:text-violet-700' : 'text-white/90 hover:text-white'
-                    } transition-colors font-medium`}
+                    } transition-colors font-medium cursor-pointer`}
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   {link.name}
-                </a>
+                </Link>
               ))}
               <button
                 onClick={toggleLanguage}
                 className={`flex items-center space-x-1 ${isScrolled ? 'text-gray-700 hover:text-violet-700' : 'text-white/90 hover:text-white'
-                  }`}
+                  } cursor-pointer`}
               >
                 <Globe2 className="h-5 w-5" />
                 <span className="uppercase">{language}</span>
@@ -66,33 +70,35 @@ const Navbar = () => {
             <button
               onClick={toggleLanguage}
               className={`${isScrolled ? 'text-gray-700' : 'text-white'
-                }`}
+                } cursor-pointer`}
             >
               <Globe2 className="h-5 w-5" />
             </button>
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className={`${isScrolled ? 'text-gray-700' : 'text-white'
-                } p-2`}
+                } p-2 cursor-pointer`}
             >
               {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile */}
         {isMenuOpen && (
           <div className="md:hidden bg-white/95 backdrop-blur-md shadow-lg absolute top-full left-0 w-full">
             <div className="px-2 pt-2 pb-3 space-y-1">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.name}
-                  href={link.href}
-                  className="block px-3 py-2 text-gray-700 hover:text-violet-700 font-medium"
+                  to={link.href}
+                  smooth={true}
+                  duration={500}
+                  className="block px-3 py-2 text-gray-700 hover:text-violet-700 font-medium cursor-pointer"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {link.name}
-                </a>
+                </Link>
               ))}
             </div>
           </div>
