@@ -1,6 +1,7 @@
+/* eslint-disable react-refresh/only-export-components */
 import { useState } from 'react';
 import { ChevronDown, ChevronUp } from 'lucide-react';
-import { useLanguage } from '../../contexts/LanguageContext'; 
+import { useLanguage } from '../../contexts/LanguageContext';
 
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -31,7 +32,7 @@ const FAQ = () => {
         <h2 className="text-4xl font-bold text-center mb-16">{t('faq.title')}</h2>
         <div className="space-y-4">
           {faqs.map((faq, index) => (
-            <div key={index} className="border rounded-lg">
+            <div key={index} className="border rounded-lg overflow-hidden">
               <button
                 className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50"
                 onClick={() => setOpenIndex(openIndex === index ? null : index)}
@@ -45,11 +46,17 @@ const FAQ = () => {
                   <ChevronDown className="h-5 w-5 text-gray-500" />
                 )}
               </button>
-              {openIndex === index && (
-                <div id={`faq-answer-${index}`} className="px-6 py-4 text-gray-600 border-t transition-all duration-200 ease-in-out max-h-0 overflow-hidden">
-                  {faq.answer}
-                </div>
-              )}
+              <div
+                id={`faq-answer-${index}`}
+                className={`px-6 py-4 text-gray-600 border-t transition-max-height duration-300 ease-in-out overflow-hidden ${
+                  openIndex === index ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
+                }`}
+                style={{
+                  transitionProperty: 'max-height, opacity',
+                }}
+              >
+                {faq.answer}
+              </div>
             </div>
           ))}
         </div>
@@ -64,5 +71,4 @@ const FAQ = () => {
   );
 };
 
-// eslint-disable-next-line react-refresh/only-export-components
 export default FAQ;
